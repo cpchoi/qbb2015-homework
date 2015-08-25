@@ -1,0 +1,13 @@
+2. fastqc reads in fastq file:
+fastqc /Users/cmdb/qbb2015/rawdata/SRR072893.fastq 
+
+3. map reads to genome BDGP6 and output SAM file named mappedRead:
+hisat -p 2 -x BDGP6 -U SRR072893.fastq -S mappedRead
+
+4. Convert SAM file to BAM, sorted, and index file:
+samtools view -b mappedReads > mappedReads.bam
+samtools sort mappedReads.bam mappedReads_sorted
+samtools index mappedReads_sorted.bam
+
+5. Quantitate sorted .bam file using StringTie:
+StringTie mappedReads_sorted.bam -p 2 -G BDGP6.Ensembl.81.gtf -e -o mappedReads_quantitate -B
