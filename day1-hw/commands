@@ -1,4 +1,4 @@
-2. fastqc reads in fastq file:
+2. fastqc reads in fastq file and quality checks:
 fastqc /Users/cmdb/qbb2015/rawdata/SRR072893.fastq 
 
 3. map reads to genome BDGP6 and output SAM file named mappedRead:
