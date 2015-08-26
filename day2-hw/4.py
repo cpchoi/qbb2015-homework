@@ -19,12 +19,6 @@ print count
 
 one_third = count/3
 two_third = (2*count)/3
-three_third = count
- #df [a:b]
- #df [b:c]
- #df [c:d]
- 
- 
 
 bottom_third= order[roi]["FPKM"][0:one_third]
 middle_third= order[roi]["FPKM"][one_third:two_third]
