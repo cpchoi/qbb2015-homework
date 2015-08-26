@@ -34,6 +34,7 @@ plt.yticks( range( 0,350,50 ))
 plt.legend( bbox_to_anchor = (1.05, 1), loc=5, borderaxespad=0 )
 plt.xlabel("developmental stage")
 plt.ylabel("mRNA abundance (FPKM)")
+plt.title("Sxl")
 
 plt.savefig("timecourse.png")
 
