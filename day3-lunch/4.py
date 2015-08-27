@@ -12,10 +12,12 @@ male = pd.read_table("~/qbb2015-homework/day2/stringtie/SRR072893/t_data.ctab")
 fnon_zero_FPKM = female["FPKM"] > 0
 mnon_zero_FPKM = male["FPKM"] > 0
 
-#log2 of each of the non zero fpkm values in the male and female data frames
-flog_FPKM = np.log2(female[fnon_zero_FPKM]["FPKM"])
+Same = fnon_zero_FPKM & mnon_zero_FPKM#
 
-mlog_FPKM = np.log2(male[mnon_zero_FPKM]["FPKM"])
+#log2 of each of the non zero fpkm values in the male and female data frames
+flog_FPKM = np.log2(female[Same][fnon_zero_FPKM]["FPKM"])
+
+mlog_FPKM = np.log2(male[Same][mnon_zero_FPKM]["FPKM"])
 
 
 # creating a list of M and A values for the M A Plot
