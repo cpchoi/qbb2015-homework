@@ -10,25 +10,27 @@ Very useful to put this in the begining to document what is happening
 Count intersection of two BED files
 """
 from __future__ import division
-from matplotlib_venn import venn3
+from matplotlib_venn import venn3, venn3_circles
+import matplotlib.pyplot as plt
 import numpy
 import sys
 import copy
 
+
 def arrays_from_len_file( fname ):
     arrays = {}
-    for line in open ( fname ):
+    for line in open( fname ):
         fields = line.split()
         name = fields[0] # this is reading the first field in each line remember 1st field is 0 in python.
         size = int( fields[1] ) #this is the second field, but we want to convert the string field into an integer
         arrays[ name ] = numpy.zeros( size, dtype=bool ) # numpy.zeros(x,y), x is the number of items in array, and y is the type of items in the dictionary (your constraining), numpy.zeros is just making all the items default to 0. arrays[names] THisi s just defining our new dictionary with the KEY name.
-        # we have a chromosome I  constrained position from 5 to 8 I want to mark that .And i want to mark that region
+            # we have a chromosome I  constrained position from 5 to 8 I want to mark that .And i want to mark that region
     return arrays
 
 def set_bits_from_file( arrays, fname ):
     for line in open( fname ):
         fields = line.split()
-        # parse ifelds
+            # parse ifelds
         chrom = fields [0]
         start = int( fields[1] )
         end = int( fields[2] )
@@ -114,7 +116,7 @@ for line in open ( sys.argv[4] ):
         chrom = fields[0]
         start = int( fields[1] )
         end = int( fields[2] ) # for slice
-        slC = first_array[chrom][start:end]
+        slC = third_array[chrom][start:end]
         sl5 = first_array[chrom][start:end]
         sl6 = second_array[chrom][start:end]
         total += 1
@@ -137,7 +139,11 @@ for line in open ( sys.argv[4] ):
         #percent = float(sys.argv[5])
         #half_overlap += ( numpy.sum(sl) / len(sl) > (percent/100) )
 
-print "A: %d. B: %d, C: %d, ABC: %d, total: %d"% (A, B, C, ABC, total)
+print "BEAF: %d. CP190: %d, suHW: %d, BEAF and CP190: %d, BEAF and suHW: %d, CP190 and suHW: %d, bind to all 3: %d, total: %d"% (A, B, C, AB, AC, BC, ABC, total)
+
+plt.figure()
+v = venn3(subsets = (A, B, AB, C, AC, BC, ABC), set_labels = ('BEAF','CP190','suHW'))
+plt.savefig("venndiagram.png")
 
 
 #grep "^chr2R" DM3_Kc_DNase.bed | ./intersect.py dm3.len DM3_phastCons.bed /dev/stdin
