@@ -48,3 +48,16 @@ class ChromosomeLocationBitArrays( object ):
     def copy( self ):
         return ChromosomeLocationBitArrays( 
             dicts=copy.deepcopy( self.arrays ) )
+            
+    def start_stop (self):
+        areas = []
+        for chrom in self.arrays:
+            row = self.arrays[chrom]
+            for i, value in enumerate(row):
+                if value == 1 and row[i-1] == 0:
+                    start = i
+                if value == 0 and row[i-1] == 1:
+                    stop = i
+                    areas.append((chrom, start, stop))
+        return areas
+    
